@@ -23,6 +23,10 @@
         </activity>
         <activity android:name=".View.Status.StatusActivity">
         </activity>
+        <activity android:name=".View.Events.EventsActivity">
+        </activity>
+        <activity android:name=".View.Guests.GuestsActivity">
+        </activity>
     </application>
 
 </manifest>
