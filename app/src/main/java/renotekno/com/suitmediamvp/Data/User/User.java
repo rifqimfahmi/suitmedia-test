@@ -6,4 +6,5 @@ package renotekno.com.suitmediamvp.Data.User;
 
 public class User {
     public static final String CHOOSED_NAME = "com.renotekno.choosed_name";
+    public static final String CHOOSED_EVENT = "com.renotekno.choosed_event";
 }

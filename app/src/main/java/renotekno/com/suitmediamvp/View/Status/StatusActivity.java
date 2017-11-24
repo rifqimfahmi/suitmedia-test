@@ -60,7 +60,18 @@ public class StatusActivity extends BaseActivity implements StatusMvpView{
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mStatusPresenter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void setName(String name) {
         mNameView.setText(name);
+    }
+
+    @Override
+    public void setEventBtn(String eventName) {
+        mEventChooserBtn.setText(eventName);
     }
 }

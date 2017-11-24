@@ -6,6 +6,7 @@ import android.os.Bundle;
 import renotekno.com.suitmediamvp.Data.AppDataManager;
 import renotekno.com.suitmediamvp.Data.User.User;
 import renotekno.com.suitmediamvp.View.Base.BasePresenter;
+import renotekno.com.suitmediamvp.View.Events.EventsActivity;
 import renotekno.com.suitmediamvp.View.Splash.SplashMvpPresenter;
 
 /**
@@ -18,9 +19,22 @@ public class StatusPresenter<V extends StatusMvpView> extends BasePresenter<V> i
         super(appDataManager);
     }
 
+    @Override
     public void bindDataToView(StatusActivity statusActivity, Bundle savedInstanceState) {
         Intent intent = statusActivity.getIntent();
         String name = intent.getStringExtra(User.CHOOSED_NAME);
         getMvpView().setName(name);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) {
+            case EventsActivity.CHOOSE_EVENT_RES:
+                String eventName = data.getStringExtra(User.CHOOSED_EVENT);
+                getMvpView().setEventBtn(eventName);
+                break;
+            default:
+                return;
+        }
     }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:paddingLeft="24dp"
+                                             android:paddingStart="24dp"
+                                             android:paddingRight="24dp"
+                                             android:paddingEnd="24dp"
+                                             android:background="?attr/selectableItemBackground"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/eventSnap"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/event_tech_in_asia"/>
+
+    <TextView
+        android:id="@+id/eventTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        tools:text="Tech in Asia"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintLeft_toRightOf="@+id/eventSnap"
+        app:layout_constraintTop_toTopOf="@+id/eventSnap"/>
+
+    <TextView
+        android:id="@+id/eventDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        tools:text="15 Sept 2018"
+        app:layout_constraintBottom_toBottomOf="@+id/eventSnap"
+        app:layout_constraintLeft_toRightOf="@+id/eventSnap"/>
+</android.support.constraint.ConstraintLayout>

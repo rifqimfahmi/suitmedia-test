@@ -1,5 +1,8 @@
 package renotekno.com.suitmediamvp.View.Status;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import renotekno.com.suitmediamvp.View.Base.MvpPresenter;
 import renotekno.com.suitmediamvp.View.Base.MvpView;
 
@@ -8,4 +11,6 @@ import renotekno.com.suitmediamvp.View.Base.MvpView;
  */
 
 public interface StatusMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
+    void onActivityResult(int requestCode, int resultCode, Intent data);
+    void bindDataToView(StatusActivity statusActivity, Bundle savedInstanceState);
 }

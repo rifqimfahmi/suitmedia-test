@@ -1,11 +1,11 @@
 package renotekno.com.suitmediamvp.View.Guests;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import renotekno.com.suitmediamvp.R;
+import renotekno.com.suitmediamvp.View.Base.BaseActivity;
 
-public class GuestsActivity extends AppCompatActivity {
+public class GuestsActivity extends BaseActivity implements GuestsMvpView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
