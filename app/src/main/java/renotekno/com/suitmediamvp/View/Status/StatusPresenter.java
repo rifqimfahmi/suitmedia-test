@@ -7,6 +7,7 @@ import renotekno.com.suitmediamvp.Data.AppDataManager;
 import renotekno.com.suitmediamvp.Data.User.User;
 import renotekno.com.suitmediamvp.View.Base.BasePresenter;
 import renotekno.com.suitmediamvp.View.Events.EventsActivity;
+import renotekno.com.suitmediamvp.View.Guests.GuestsActivity;
 import renotekno.com.suitmediamvp.View.Splash.SplashMvpPresenter;
 
 /**
@@ -21,9 +22,17 @@ public class StatusPresenter<V extends StatusMvpView> extends BasePresenter<V> i
 
     @Override
     public void bindDataToView(StatusActivity statusActivity, Bundle savedInstanceState) {
+
+
+
         Intent intent = statusActivity.getIntent();
         String name = intent.getStringExtra(User.CHOOSED_NAME);
         getMvpView().setName(name);
+    }
+
+    @Override
+    public void saveState(Bundle outState) {
+//        outState.
     }
 
     @Override
@@ -32,6 +41,13 @@ public class StatusPresenter<V extends StatusMvpView> extends BasePresenter<V> i
             case EventsActivity.CHOOSE_EVENT_RES:
                 String eventName = data.getStringExtra(User.CHOOSED_EVENT);
                 getMvpView().setEventBtn(eventName);
+                break;
+            case GuestsActivity.CHOOSE_REQ_RES:
+                String guestName = data.getStringExtra(User.CHOOSED_GUEST_NAME);
+                getMvpView().setGuestBtn(guestName);
+
+                String toastMessage = data.getStringExtra(User.CHOOSED_GUEST_TOAST);
+                getMvpView().runToast(toastMessage);
                 break;
             default:
                 return;

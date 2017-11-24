@@ -9,4 +9,6 @@ import renotekno.com.suitmediamvp.View.Base.MvpView;
 public interface StatusMvpView extends MvpView {
     void setName(String name);
     void setEventBtn(String eventName);
+    void setGuestBtn(String guestName);
+    void runToast(String toastMessage);
 }

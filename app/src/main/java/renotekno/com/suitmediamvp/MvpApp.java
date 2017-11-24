@@ -2,6 +2,8 @@ package renotekno.com.suitmediamvp;
 
 import android.app.Application;
 
+import com.androidnetworking.AndroidNetworking;
+
 import renotekno.com.suitmediamvp.Data.AppDataManager;
 
 /**
@@ -16,6 +18,7 @@ public class MvpApp extends Application {
     public void onCreate() {
         super.onCreate();
 
+        AndroidNetworking.initialize(getApplicationContext());
         mAppDataManager = new AppDataManager();
     }
 

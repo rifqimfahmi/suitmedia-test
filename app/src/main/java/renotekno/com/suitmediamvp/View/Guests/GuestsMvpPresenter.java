@@ -8,4 +8,7 @@ import renotekno.com.suitmediamvp.View.Base.MvpView;
  */
 
 public interface GuestsMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
+    void loadGuestsData(GuestsActivity guestsActivity);
+    void configRecyclerView();
+    void reloadData(GuestsActivity guestsActivity);
 }

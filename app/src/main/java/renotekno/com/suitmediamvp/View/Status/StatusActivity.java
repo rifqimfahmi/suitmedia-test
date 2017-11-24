@@ -17,6 +17,7 @@ import renotekno.com.suitmediamvp.MvpApp;
 import renotekno.com.suitmediamvp.R;
 import renotekno.com.suitmediamvp.View.Base.BaseActivity;
 import renotekno.com.suitmediamvp.View.Events.EventsActivity;
+import renotekno.com.suitmediamvp.View.Guests.GuestsActivity;
 import renotekno.com.suitmediamvp.View.Home.HomeActivity;
 import renotekno.com.suitmediamvp.View.Home.HomePresenter;
 
@@ -56,7 +57,14 @@ public class StatusActivity extends BaseActivity implements StatusMvpView{
 
     @OnClick(R.id.guestChooserBtn)
     public void openGuestActivityChooser () {
+        Intent intent = GuestsActivity.getStartIntent(this);
+        startActivityForResult(intent, GuestsActivity.CHOOSE_REQ_REQ);
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mStatusPresenter.saveState(outState);
     }
 
     @Override
@@ -73,5 +81,15 @@ public class StatusActivity extends BaseActivity implements StatusMvpView{
     @Override
     public void setEventBtn(String eventName) {
         mEventChooserBtn.setText(eventName);
+    }
+
+    @Override
+    public void setGuestBtn(String guestName) {
+        mGuestChooserBtn.setText(guestName);
+    }
+
+    @Override
+    public void runToast(String toastMessage) {
+        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
     }
 }
