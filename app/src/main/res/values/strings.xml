@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Suitmedia MVP</string>
+    <string name="invalid_empty_name">Isi nama terlebih dahulu</string>
 </resources>

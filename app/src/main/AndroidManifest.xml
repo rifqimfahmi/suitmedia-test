@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".View.Home.HomeActivity">
         </activity>
+        <activity android:name=".View.Status.StatusActivity">
+        </activity>
     </application>
 
 </manifest>
