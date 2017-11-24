@@ -64,7 +64,7 @@ public class StatusActivity extends BaseActivity implements StatusMvpView{
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mStatusPresenter.saveState(outState);
+        mStatusPresenter.saveState(outState, mEventChooserBtn.getText().toString(), mGuestChooserBtn.getText().toString());
     }
 
     @Override

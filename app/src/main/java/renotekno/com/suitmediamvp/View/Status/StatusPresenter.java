@@ -23,7 +23,10 @@ public class StatusPresenter<V extends StatusMvpView> extends BasePresenter<V> i
     @Override
     public void bindDataToView(StatusActivity statusActivity, Bundle savedInstanceState) {
 
-
+        if (savedInstanceState != null) {
+            getMvpView().setEventBtn(savedInstanceState.getString(User.CHOOSED_EVENT));
+            getMvpView().setGuestBtn(savedInstanceState.getString(User.CHOOSED_GUEST_NAME));
+        }
 
         Intent intent = statusActivity.getIntent();
         String name = intent.getStringExtra(User.CHOOSED_NAME);
@@ -31,8 +34,9 @@ public class StatusPresenter<V extends StatusMvpView> extends BasePresenter<V> i
     }
 
     @Override
-    public void saveState(Bundle outState) {
-//        outState.
+    public void saveState(Bundle outState, String choosedEventName, String choosedGuestName) {
+        outState.putString(User.CHOOSED_EVENT, choosedEventName);
+        outState.putString(User.CHOOSED_GUEST_NAME, choosedGuestName);
     }
 
     @Override
