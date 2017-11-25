@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Suitmedia MVP</string>
     <string name="invalid_empty_name">Isi nama terlebih dahulu</string>
+    <string name="dummy_content_snippet">This is version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean gravida nibh vel velit auctor aliquet....</string>
 </resources>

@@ -2,22 +2,24 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
-                                             android:paddingLeft="24dp"
-                                             android:paddingStart="24dp"
-                                             android:paddingRight="24dp"
-                                             android:paddingEnd="24dp"
-                                             android:background="?attr/selectableItemBackground"
                                              android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
+                                             android:layout_height="wrap_content"
+                                             android:layout_marginBottom="4dp"
+                                             android:layout_marginLeft="8dp"
+                                             android:layout_marginRight="8dp"
+                                             android:layout_marginTop="4dp"
+                                             android:foreground="?attr/selectableItemBackground"
+                                             android:background="@drawable/event_border">
 
-    <ImageView
+    <com.joooonho.SelectableRoundedImageView
         android:id="@+id/eventSnap"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="112dp"
+        android:layout_height="176dp"
+        android:scaleType="centerCrop"
+        app:sriv_right_top_corner_radius="3dp"
+        app:sriv_right_bottom_corner_radius="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/event_tech_in_asia"/>
 
@@ -26,19 +28,109 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        tools:text="Tech in Asia"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintLeft_toRightOf="@+id/eventSnap"
-        app:layout_constraintTop_toTopOf="@+id/eventSnap"/>
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tech in Asia"/>
 
     <TextView
         android:id="@+id/eventDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/event_date"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@+id/eventTitle"
+        app:layout_constraintTop_toBottomOf="@+id/eventTitle"
+        tools:text="15 Sept 2018"/>
+
+    <LinearLayout
+        android:id="@+id/labelsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        android:maxHeight="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/eventDate"
+        app:layout_constraintRight_toLeftOf="@+id/eventSnap"
+        app:layout_constraintTop_toBottomOf="@+id/eventDate">
+
+        <TextView
+            android:id="@+id/eventLabel1"
+            tools:text="#nutricia"
+            style="@style/LabelEvent"/>
+
+        <TextView
+            android:id="@+id/eventLabel2"
+            tools:text="#highlight F3"
+            style="@style/LabelEvent"/>
+
+        <TextView
+            android:id="@+id/eventLabel3"
+            tools:text="#event"
+            style="@style/LabelEvent"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/eventSnippet"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        tools:text="15 Sept 2018"
-        app:layout_constraintBottom_toBottomOf="@+id/eventSnap"
-        app:layout_constraintLeft_toRightOf="@+id/eventSnap"/>
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="3sp"
+        android:maxLines="4"
+        android:text="@string/dummy_content_snippet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/labelsContainer"
+        app:layout_constraintRight_toLeftOf="@+id/eventSnap"
+        app:layout_constraintTop_toBottomOf="@+id/labelsContainer"/>
 </android.support.constraint.ConstraintLayout>
+    <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:paddingLeft="24dp"-->
+    <!--android:paddingStart="24dp"-->
+    <!--android:paddingRight="24dp"-->
+    <!--android:paddingEnd="24dp"-->
+    <!--android:background="?attr/selectableItemBackground"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/eventSnap"-->
+    <!--android:layout_width="64dp"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:layout_marginBottom="16dp"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--tools:src="@drawable/event_tech_in_asia"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/eventTitle"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--tools:text="Tech in Asia"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Title"-->
+    <!--app:layout_constraintLeft_toRightOf="@+id/eventSnap"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/eventSnap"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/eventDate"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--tools:text="15 Sept 2018"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/eventSnap"-->
+    <!--app:layout_constraintLeft_toRightOf="@+id/eventSnap"/>-->
+    <!--</android.support.constraint.ConstraintLayout>-->

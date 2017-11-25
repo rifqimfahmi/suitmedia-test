@@ -32,6 +32,7 @@ dependencies {
     compile 'com.amitshekhar.android:android-networking:1.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'com.joooonho:selectableroundedimageview:1.0.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

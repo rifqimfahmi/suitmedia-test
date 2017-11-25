@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="list_divider">#CCC</color>
+    <color name="event_border">#DDDDDD</color>
+    <color name="label_color">#AEC2CE</color>
+    <color name="event_date">#CCBD71</color>
+    <color name="eventColor">#F9F9F9</color>
 </resources>

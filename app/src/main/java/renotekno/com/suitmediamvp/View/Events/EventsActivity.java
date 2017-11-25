@@ -59,6 +59,9 @@ public class EventsActivity extends BaseActivity implements EventsMvpView {
         mEventsList.setHasFixedSize(true);
         mEventsList.setLayoutManager(manager);
         mEventsList.setAdapter(adapter);
-        mEventsList.addItemDecoration(divider);
+
+        if (divider != null) {
+            mEventsList.addItemDecoration(divider);
+        }
     }
 }

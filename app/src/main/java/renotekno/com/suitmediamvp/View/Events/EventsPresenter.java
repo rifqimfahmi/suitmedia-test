@@ -24,8 +24,8 @@ public class EventsPresenter<V extends EventsMvpView> extends BasePresenter<V> i
     public void configRecyclerView(Context context) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         EventsAdapter eventsAdapter = new EventsAdapter(this);
-        Divider divider = new Divider(ContextCompat.getDrawable(context, R.drawable.list_divider));
-        getMvpView().initEventsList(linearLayoutManager, eventsAdapter, divider);
+//        Divider divider = new Divider(ContextCompat.getDrawable(context, R.drawable.list_divider));
+        getMvpView().initEventsList(linearLayoutManager, eventsAdapter, null);
     }
 
     @Override
