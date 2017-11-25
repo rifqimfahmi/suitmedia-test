@@ -3,7 +3,6 @@ package renotekno.com.suitmediamvp.Util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.ANRequest;
@@ -26,6 +25,9 @@ import renotekno.com.suitmediamvp.Data.Guest.Model.Guest;
  */
 
 public class CommonUtils {
+
+    public static final int[] basePrime = {1, 2, 3, 5, 7};
+
     private CommonUtils () {
 
     }
@@ -85,5 +87,24 @@ public class CommonUtils {
         }
 
         return guests;
+    }
+
+    public static boolean isPrime(int num) {
+        for (int i = 0; i < CommonUtils.basePrime.length; i ++) {
+            int baseNum = CommonUtils.basePrime[i];
+
+            if (num == baseNum) {
+                return true;
+            }
+
+            if (baseNum == 1) {
+                continue;
+            }
+
+            if (num % baseNum == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

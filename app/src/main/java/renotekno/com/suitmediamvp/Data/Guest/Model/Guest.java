@@ -2,6 +2,8 @@ package renotekno.com.suitmediamvp.Data.Guest.Model;
 
 import android.content.Context;
 
+import renotekno.com.suitmediamvp.Util.CommonUtils;
+
 /**
  * Created by zcabez on 11/23/2017.
  */
@@ -28,9 +30,13 @@ public class Guest {
         return mName;
     }
 
+    public boolean isMonthPrime() {
+        int month = getMonth();
+        return CommonUtils.isPrime(month);
+    }
+
     public String getToastText() {
-        String[] dateComponent = mBirthDate.split("-");
-        int day = Integer.parseInt(dateComponent[2]);
+        int day = getDay();
         String toastText = "";
 
         if (day <= 1) {
@@ -44,6 +50,16 @@ public class Guest {
         }
 
         return toastText;
+    }
+
+    private int getDay(){
+        String[] dateComponent = mBirthDate.split("-");
+        return Integer.parseInt(dateComponent[2]);
+    }
+
+    private int getMonth() {
+        String[] dateComponent = mBirthDate.split("-");
+        return Integer.parseInt(dateComponent[1]);
     }
 
     private boolean isEven(int num) {
