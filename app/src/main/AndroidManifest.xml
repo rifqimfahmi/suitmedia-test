@@ -22,7 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".View.Home.HomeActivity">
+        <activity android:name=".View.Home.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".View.Status.StatusActivity">
         </activity>
