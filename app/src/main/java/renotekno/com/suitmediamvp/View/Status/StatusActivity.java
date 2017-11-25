@@ -1,7 +1,9 @@
 package renotekno.com.suitmediamvp.View.Status;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -47,6 +49,7 @@ public class StatusActivity extends BaseActivity implements StatusMvpView{
         mStatusPresenter = new StatusPresenter(appDataManager);
         mStatusPresenter.onAttach(this);
         mStatusPresenter.bindDataToView(this, savedInstanceState);
+        mStatusPresenter.checkPalindromeName(mNameView.getText().toString());
     }
 
     @OnClick(R.id.eventChooserBtn)
@@ -91,5 +94,19 @@ public class StatusActivity extends BaseActivity implements StatusMvpView{
     @Override
     public void runToast(String toastMessage) {
         Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showPalindromeStatus(String message) {
+        new AlertDialog.Builder(StatusActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
+                .show();
     }
 }

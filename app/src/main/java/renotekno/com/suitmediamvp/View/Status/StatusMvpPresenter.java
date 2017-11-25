@@ -14,4 +14,5 @@ public interface StatusMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
     void onActivityResult(int requestCode, int resultCode, Intent data);
     void bindDataToView(StatusActivity statusActivity, Bundle savedInstanceState);
     void saveState(Bundle outState, String choosedEventName, String choosedGuestName);
+    void checkPalindromeName(String name);
 }

@@ -11,4 +11,5 @@ public interface StatusMvpView extends MvpView {
     void setEventBtn(String eventName);
     void setGuestBtn(String guestName);
     void runToast(String toastMessage);
+    void showPalindromeStatus(String message);
 }

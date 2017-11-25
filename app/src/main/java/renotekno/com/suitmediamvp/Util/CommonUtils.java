@@ -30,6 +30,24 @@ public class CommonUtils {
 
     }
 
+    public static boolean isPalindrome(String name){
+        String noSpace = name.toLowerCase().replace(" ", "");
+        char[] words = noSpace.toCharArray();
+
+        int i = 0;
+        int x = words.length - 1;
+
+        while (x > i) {
+            if (words[i] != words[x]) {
+                return false;
+            }
+            i++;
+            x--;
+        }
+
+        return true;
+    }
+
     public static boolean isNameValid(String name) {
         return !name.isEmpty();
     }
