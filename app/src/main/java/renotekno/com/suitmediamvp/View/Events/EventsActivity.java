@@ -7,11 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,9 +28,11 @@ import renotekno.com.suitmediamvp.MvpApp;
 import renotekno.com.suitmediamvp.R;
 import renotekno.com.suitmediamvp.View.Base.BaseActivity;
 
-public class EventsActivity extends BaseActivity implements EventsMvpView {
+public class EventsActivity extends BaseActivity implements EventsMvpView, OnMapReadyCallback {
 
     EventsPresenter mEventsPresenter;
+    SupportMapFragment mEventMap;
+    GoogleMap mGoogleMap;
 
     @BindView(R.id.eventsList)
     RecyclerView mEventsList;
@@ -54,6 +60,8 @@ public class EventsActivity extends BaseActivity implements EventsMvpView {
 
         setSupportActionBar(mToolbar);
         mEventsPresenter.configToolBar(this);
+
+        mEventMap = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment);
     }
 
     @Override
@@ -103,20 +111,48 @@ public class EventsActivity extends BaseActivity implements EventsMvpView {
         snapHelper.attachToRecyclerView(mEventsList);
         eventsAdapter.notifyDataSetChanged();
 
+        mEventMap.getMapAsync(this);
+        getSupportFragmentManager().beginTransaction().show(mEventMap).commit();
+        mEventsPresenter.refreshDataMarkerState();
+
         mEventsList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int position = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-                    mEventsPresenter.changeMapPinPoint(position);
+                    mEventsPresenter.changeMapPinPoint(EventsActivity.this, position);
                 }
             }
         });
     }
 
     @Override
-    public void changeMapPinPoint(int position) {
-        Log.d("POSITION", position + "");
+    public void addMarker(Event event, MarkerOptions markerOpt) {
+        Marker marker = mGoogleMap.addMarker(markerOpt);
+        event.setMarker(marker);
+    }
+
+    @Override
+    public void flyTo(CameraUpdate cameraUpdate) {
+        mGoogleMap.animateCamera(cameraUpdate, 500, null);
+    }
+
+    @Override
+    public void smoothScrollTo(int markerPosition) {
+        mEventsList.smoothScrollToPosition(markerPosition);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap;
+        mEventsPresenter.addMarkers(this);
+        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                mEventsPresenter.goToMarker(EventsActivity.this, marker);
+                return true;
+            }
+        });
     }
 }

@@ -13,7 +13,6 @@ import com.joooonho.SelectableRoundedImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import renotekno.com.suitmediamvp.Data.AppDataManager;
-import renotekno.com.suitmediamvp.Data.Base.HorizontalListItemListener;
 import renotekno.com.suitmediamvp.Data.Base.ListItemListener;
 import renotekno.com.suitmediamvp.Data.Event.Model.Event;
 import renotekno.com.suitmediamvp.R;
@@ -28,7 +27,6 @@ import static android.view.View.GONE;
 public class EventsAdapter extends RecyclerView.Adapter {
 
     ListItemListener mListItemListener;
-    HorizontalListItemListener mHorizontalListItemListener;
 
     public static final int CARD_VERTICAL = 0;
     public static final int CARD_HORIZONTAL = 1;
@@ -36,7 +34,6 @@ public class EventsAdapter extends RecyclerView.Adapter {
 
     public EventsAdapter(EventsPresenter eventsPresenter) {
         mListItemListener = eventsPresenter;
-        mHorizontalListItemListener = eventsPresenter;
     }
 
     @Override
@@ -145,7 +142,7 @@ public class EventsAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View view) {
-            mHorizontalListItemListener.onHorizontalItemClick(AppDataManager.events[getAdapterPosition()], getAdapterPosition());
+            mListItemListener.onListItemClick(AppDataManager.events[getAdapterPosition()]);
         }
     }
 }

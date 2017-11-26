@@ -4,6 +4,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import renotekno.com.suitmediamvp.Data.Event.Adapter.EventsAdapter;
 import renotekno.com.suitmediamvp.Data.Event.Decoration.Divider;
 import renotekno.com.suitmediamvp.Data.Event.Model.Event;
@@ -18,5 +22,7 @@ public interface EventsMvpView extends MvpView {
     void initEventsList(LinearLayoutManager manager, EventsAdapter adapter, @Nullable Divider divider);
     void horizontalItemClicked(Event event, int position);
     void changeOrientation(LinearLayoutManager horizontalLM, LinearSnapHelper snapHelper, EventsAdapter eventsAdapter);
-    void changeMapPinPoint(int position);
+    void addMarker(Event event, MarkerOptions markerOpt);
+    void flyTo(CameraUpdate cameraUpdate);
+    void smoothScrollTo(int markerPosition);
 }
