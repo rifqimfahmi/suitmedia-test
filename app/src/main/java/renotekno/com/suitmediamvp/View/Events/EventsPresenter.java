@@ -34,4 +34,13 @@ public class EventsPresenter<V extends EventsMvpView> extends BasePresenter<V> i
         Event event = (Event) object;
         getMvpView().eventChoosed(event);
     }
+
+    @Override
+    public void configToolBar(EventsActivity activity) {
+        if (activity.getSupportActionBar() == null) return;
+
+        activity.getSupportActionBar().setTitle("MESSAGE FROM CODI");
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
 }

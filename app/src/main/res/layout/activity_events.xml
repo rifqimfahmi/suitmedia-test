@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/eventsList"
+    android:id="@+id/container"
+    android:orientation="vertical"
     tools:context=".View.Events.EventsActivity">
 
-</android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/app_bar_bg"
+        android:id="@+id/eventToolbar"
+        app:titleTextColor="@color/colorPrimary_event"
+        app:subtitleTextColor="@color/colorPrimary_event"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:clipToPadding="false"
+        android:id="@+id/eventsList"
+        tools:context=".View.Events.EventsActivity">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

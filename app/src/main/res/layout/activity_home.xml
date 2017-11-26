@@ -20,6 +20,7 @@
         android:background="@drawable/text_field"
         android:hint="Masukkan nama Anda"
         android:fontFamily="sans-serif-light"
+        android:textCursorDrawable="@null"
         android:inputType="textPersonName"
         android:paddingEnd="16dp"
         android:paddingLeft="16dp"

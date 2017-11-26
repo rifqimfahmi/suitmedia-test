@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -25,6 +28,8 @@ public class EventsActivity extends BaseActivity implements EventsMvpView {
 
     @BindView(R.id.eventsList)
     RecyclerView mEventsList;
+    @BindView(R.id.eventToolbar)
+    Toolbar mToolbar;
 
     public static final int CHOOSE_EVENT_REQ = 3;
     public static final int CHOOSE_EVENT_RES = 3200;
@@ -44,6 +49,15 @@ public class EventsActivity extends BaseActivity implements EventsMvpView {
         mEventsPresenter = new EventsPresenter(appDataManager);
         mEventsPresenter.onAttach(this);
         mEventsPresenter.configRecyclerView(this);
+
+        setSupportActionBar(mToolbar);
+        mEventsPresenter.configToolBar(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.event_menu, menu);
+        return true;
     }
 
     @Override

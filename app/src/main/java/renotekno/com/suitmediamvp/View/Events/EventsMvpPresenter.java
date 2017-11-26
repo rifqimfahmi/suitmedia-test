@@ -8,4 +8,5 @@ import renotekno.com.suitmediamvp.View.Base.MvpView;
  */
 
 public interface EventsMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
+    void configToolBar(EventsActivity activity);
 }

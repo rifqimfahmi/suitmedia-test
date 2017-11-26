@@ -13,6 +13,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.EventList" parent="AppTheme.NoActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/ic_btn_back_article</item>
+        <item name="colorPrimary">@color/colorPrimary_event</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_event</item>
+    </style>
+
     <style name="LabelEvent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
