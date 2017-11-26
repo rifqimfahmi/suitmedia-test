@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -61,6 +63,17 @@ public class EventsActivity extends BaseActivity implements EventsMvpView {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addNew: {
+                EventsAdapter eventsAdapter = (EventsAdapter) mEventsList.getAdapter();
+                mEventsPresenter.changeEventOrientation(this, eventsAdapter);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void eventChoosed(Event event) {
         Intent intent = new Intent();
         intent.putExtra(User.CHOOSED_EVENT, event.getName());
@@ -77,5 +90,33 @@ public class EventsActivity extends BaseActivity implements EventsMvpView {
         if (divider != null) {
             mEventsList.addItemDecoration(divider);
         }
+    }
+
+    @Override
+    public void horizontalItemClicked(Event event, int position) {
+        mEventsList.smoothScrollToPosition(position);
+    }
+
+    @Override
+    public void changeOrientation(LinearLayoutManager horizontalLM, LinearSnapHelper snapHelper, EventsAdapter eventsAdapter) {
+        mEventsList.setLayoutManager(horizontalLM);
+        snapHelper.attachToRecyclerView(mEventsList);
+        eventsAdapter.notifyDataSetChanged();
+
+        mEventsList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int position = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+                    mEventsPresenter.changeMapPinPoint(position);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void changeMapPinPoint(int position) {
+        Log.d("POSITION", position + "");
     }
 }

@@ -2,6 +2,7 @@ package renotekno.com.suitmediamvp.View.Events;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 
 import renotekno.com.suitmediamvp.Data.Event.Adapter.EventsAdapter;
 import renotekno.com.suitmediamvp.Data.Event.Decoration.Divider;
@@ -15,4 +16,7 @@ import renotekno.com.suitmediamvp.View.Base.MvpView;
 public interface EventsMvpView extends MvpView {
     void eventChoosed(Event event);
     void initEventsList(LinearLayoutManager manager, EventsAdapter adapter, @Nullable Divider divider);
+    void horizontalItemClicked(Event event, int position);
+    void changeOrientation(LinearLayoutManager horizontalLM, LinearSnapHelper snapHelper, EventsAdapter eventsAdapter);
+    void changeMapPinPoint(int position);
 }

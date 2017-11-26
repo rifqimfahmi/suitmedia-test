@@ -1,5 +1,8 @@
 package renotekno.com.suitmediamvp.View.Events;
 
+import android.content.Context;
+
+import renotekno.com.suitmediamvp.Data.Event.Adapter.EventsAdapter;
 import renotekno.com.suitmediamvp.View.Base.MvpPresenter;
 import renotekno.com.suitmediamvp.View.Base.MvpView;
 
@@ -9,4 +12,6 @@ import renotekno.com.suitmediamvp.View.Base.MvpView;
 
 public interface EventsMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
     void configToolBar(EventsActivity activity);
+    void changeEventOrientation(Context context, EventsAdapter eventsAdapter);
+    void changeMapPinPoint(int position);
 }

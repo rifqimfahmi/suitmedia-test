@@ -1,6 +1,7 @@
 package renotekno.com.suitmediamvp.Data.Event.Adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,10 @@ import com.joooonho.SelectableRoundedImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import renotekno.com.suitmediamvp.Data.AppDataManager;
+import renotekno.com.suitmediamvp.Data.Base.HorizontalListItemListener;
 import renotekno.com.suitmediamvp.Data.Base.ListItemListener;
 import renotekno.com.suitmediamvp.Data.Event.Model.Event;
 import renotekno.com.suitmediamvp.R;
-import renotekno.com.suitmediamvp.View.Events.EventsMvpView;
 import renotekno.com.suitmediamvp.View.Events.EventsPresenter;
 
 import static android.view.View.GONE;
@@ -24,24 +25,54 @@ import static android.view.View.GONE;
  * Created by zcabez on 11/24/2017.
  */
 
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventVH> {
+public class EventsAdapter extends RecyclerView.Adapter {
 
     ListItemListener mListItemListener;
+    HorizontalListItemListener mHorizontalListItemListener;
 
-    public <V extends EventsMvpView> EventsAdapter(EventsPresenter eventsPresenter) {
+    public static final int CARD_VERTICAL = 0;
+    public static final int CARD_HORIZONTAL = 1;
+    boolean isCardVerticalView = true;
+
+    public EventsAdapter(EventsPresenter eventsPresenter) {
         mListItemListener = eventsPresenter;
+        mHorizontalListItemListener = eventsPresenter;
     }
 
     @Override
-    public EventVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event, parent, false);
-        return new EventVH(view);
+    public int getItemViewType(int position) {
+        if (isCardVerticalView) return CARD_VERTICAL;
+        return CARD_HORIZONTAL;
+    }
+
+    public void changeOrientation() {
+        isCardVerticalView = false;
+    }
+
+    public boolean isCardVerticalView () {
+        return isCardVerticalView;
     }
 
     @Override
-    public void onBindViewHolder(EventVH holder, int position) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater view = LayoutInflater.from(parent.getContext());
+        if ( viewType == CARD_HORIZONTAL ) {
+            return new EventHorizontalVH(view.inflate(R.layout.item_event_horizontal, parent, false));
+        }
+        return new EventVerticalVH(view.inflate(R.layout.item_event_vertical, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Event event = AppDataManager.events[position];
-        holder.bindDataToView(event);
+        switch (getItemViewType(position)) {
+            case CARD_VERTICAL:
+                ((EventVerticalVH) holder).bindDataToView(event);
+                break;
+            case CARD_HORIZONTAL:
+                ((EventHorizontalVH) holder).bindDataToView(event);
+                break;
+        }
     }
 
     @Override
@@ -49,7 +80,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventVH> {
         return AppDataManager.events.length;
     }
 
-    class EventVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class EventVerticalVH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.eventSnap)
         SelectableRoundedImageView mSnap;
@@ -59,7 +90,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventVH> {
         @BindView(R.id.eventLabel2) TextView mLabel2;
         @BindView(R.id.eventLabel3) TextView mLabel3;
 
-        public EventVH(View itemView) {
+        public EventVerticalVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
@@ -92,6 +123,29 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventVH> {
         @Override
         public void onClick(View view) {
             mListItemListener.onListItemClick(AppDataManager.events[getAdapterPosition()]);
+        }
+    }
+
+    class EventHorizontalVH extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        @BindView(R.id.eventTitle) TextView mEventTitle;
+        @BindView(R.id.eventSnap)
+        ImageView mEventSnap;
+
+        public EventHorizontalVH(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        public void bindDataToView(Event event) {
+            mEventSnap.setImageResource(event.getSnap());
+            mEventTitle.setText(event.getName());
+        }
+
+        @Override
+        public void onClick(View view) {
+            mHorizontalListItemListener.onHorizontalItemClick(AppDataManager.events[getAdapterPosition()], getAdapterPosition());
         }
     }
 }

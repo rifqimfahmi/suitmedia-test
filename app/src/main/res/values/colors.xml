@@ -14,4 +14,5 @@
 
     <color name="colorPrimary_event">#c5b457</color>
     <color name="colorPrimaryDark_event">#baa740</color>
+    <color name="event_item_horizontal_title_bg">#80000000</color>
 </resources>
